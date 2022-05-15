@@ -24,6 +24,14 @@ public class Product {
     @Column(name = "productId", nullable = false)
     private Long productId;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "Product_id", referencedColumnName = "productId")
+    private List<ProjectProduct> projectProductList = new ArrayList<>();
+
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "User_id", referencedColumnName = "id")
+//    private List<SalesRepresentative> salesRepresentativeList = new ArrayList<>();
+
     @Column(name = "subcategory")
     private String subCategory; // should be: private Category subCategory(once category entity has been created)
 

@@ -24,6 +24,10 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "User_id", referencedColumnName = "id")
+    private List<Project> projectList = new ArrayList<>();
+
     @Column(name = "name")
     private String name;
 

@@ -28,8 +28,8 @@ public class ProjectProduct {
     @Column(name = "projectId")
     private Long projectId;
 
-    @Column(name = "productId")
-    private Long productId;
+//    @Column(name = "productId")
+//    private Long productId;
 
     @Column(name = "timeAdded")
     private Date timeAdded;

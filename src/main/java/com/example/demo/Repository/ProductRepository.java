@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Serializable> {
-    public List<Product> findByProductId(int Id);
+    public Product findByProductId(int Id);
 }
