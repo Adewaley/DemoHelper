@@ -6,8 +6,8 @@ import com.example.demo.Service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class AdminImpl implements AdminService {
+@Service("adminServiceImpl")
+public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AdminRepository adminRepository;
