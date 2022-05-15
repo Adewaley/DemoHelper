@@ -14,8 +14,8 @@ public class Category {
     private String name;
 
     @JsonIgnore
-    @OneToMany
-    @JoinColumn(name = "category_id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private List<SubCategory> subCategoryList;
 
     public Category() {

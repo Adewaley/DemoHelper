@@ -3,6 +3,7 @@ package com.example.demo.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "subcategory")
@@ -19,6 +20,10 @@ public class SubCategory {
     @ManyToOne
     @JsonIgnore
     private Category category;
+
+    @OneToMany
+    @JsonIgnore
+    private List<Product> productList;
 
     public int getId() {
         return id;
@@ -38,5 +43,13 @@ public class SubCategory {
 
     public void setTechnicalSpecificationTemplate(String technicalSpecificationTemplate) {
         this.technicalSpecificationTemplate = technicalSpecificationTemplate;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
