@@ -25,11 +25,11 @@ public class Product {
     private Long productId;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "Product_id", referencedColumnName = "productId")
+    @JoinColumn(name = "ProjectProduct_id", referencedColumnName = "productId")
     private List<ProjectProduct> projectProductList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "Product_id", referencedColumnName = "productId")
+    @JoinColumn(name = "Document_Id", referencedColumnName = "productId")
     private List<Document> documentList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

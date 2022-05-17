@@ -1,36 +1,61 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Entity.Category;
 import com.example.demo.Entity.Product;
 import com.example.demo.Entity.User;
+import com.example.demo.Service.CategoryService;
 import com.example.demo.Service.ProductService;
 import com.example.demo.Service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping(value = "/Product")
+@RequestMapping(value = "/ProductController")
 public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "/saveProduct", method = RequestMethod.POST)
-    @ResponseBody
-    public Product saveProduct(@RequestBody Product product) {
-        Product productResponse = productService.saveProduct(product);
-        return productResponse;
+
+    @GetMapping("/products")
+    public List<Product> getAllProduct() {
+        return productService.findAllProduct();
     }
 
-    @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
-    @ResponseBody
-    public Product getProductDetails(@PathVariable Long productId) {
-        Product productResponse = productService.findByProductId(productId);
+    @GetMapping
+    public Product getProductId(@RequestParam("id") Integer id) {
+        if (id == null) {
+            return null;
+        }
+        return productService.findByProductId(id);
+    }
 
-        return productResponse;
+    @PostMapping
+    public Product createProduct(@RequestParam("description") String description,
+                       @RequestParam("type") String type,
+                       @RequestParam("detail") String detail,
+                       @RequestParam("tech_specs") String techSpecs) {
+        Product product = new Product();
+        product.setDescription(description);
+        product.setType(detail);
+        product.setTechnicalSpecification(techSpecs);
+        //product.setTimeCreated();
+        return productService.saveProduct(product);
+    }
+
+    @PutMapping("/products/")
+    public Product updateProduct(@RequestParam("description") String description,
+                              @RequestParam("type") String type,
+                              @RequestParam("detail") String detail,
+                              @RequestParam("tech_specs") String techSpecs,
+                              @RequestParam("id") Integer id) {
+        Product product = productService.findByProductId(id);
+        product.setDescription(description);
+        product.setType(detail);
+        product.setTechnicalSpecification(techSpecs);
+        return productService.saveProduct(product);
     }
 }
+

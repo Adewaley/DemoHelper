@@ -33,7 +33,7 @@ public class User {
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_Id", referencedColumnName = "id")
+    @JoinColumn(name = "UserProject_Id", referencedColumnName = "id")
     private List<Project> projectList = new ArrayList<>();
 
     @Column(name = "Admin")
