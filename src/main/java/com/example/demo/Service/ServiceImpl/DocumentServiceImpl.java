@@ -13,8 +13,12 @@ public class DocumentServiceImpl implements DocumentService {
     private DocumentRepository documentRepository;
 
     @Override
+    public Document findByDocumentId(int id) {
+        return documentRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public Document saveDocument(Document document) {
-        document = documentRepository.save(document);
-        return document;
+        return documentRepository.save(document);
     }
 }
