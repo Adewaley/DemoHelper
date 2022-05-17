@@ -12,4 +12,7 @@ public interface CategoryService {
     Category findOneById(int id);
 
     Category save(Category category);
+
+    interface ProjectProductService {
+    }
 }
