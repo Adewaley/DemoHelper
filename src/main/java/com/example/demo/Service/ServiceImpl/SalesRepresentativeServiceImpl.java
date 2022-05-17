@@ -15,8 +15,12 @@ public class SalesRepresentativeServiceImpl implements SalesRepresentativeServic
     private SalesRepresentativeRepository salesRepresentativeRepository;
 
     @Override
+    public SalesRepresentative findBySalesRepId(int id) {
+        return salesRepresentativeRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public SalesRepresentative saveSalesRep(SalesRepresentative salesRepresentative) {
-        salesRepresentative = salesRepresentativeRepository.save(salesRepresentative);
-        return salesRepresentative;
+        return salesRepresentativeRepository.save(salesRepresentative);
     }
 }
