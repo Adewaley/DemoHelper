@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Entity.Project;
 import com.example.demo.Entity.User;
 import com.example.demo.Service.UserService;
 
@@ -55,5 +56,8 @@ public class UserController {
         userService.createOneUser();
     }
 
-
+    @PostMapping
+    public void delete(int id, String password) {
+        userService.delete(id, userService.findOneUserById(id).getPassword());
+    }
 }
