@@ -1,5 +1,6 @@
 package com.example.demo.Service.ServiceImpl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,14 +20,32 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
 
     @Override
+    public List<User> findAllUser() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User findOneUserById(Integer id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public User saveUser(User user) {
         user = userRepository.save(user);
         return user;
     }
 
     @Override
-    public User findByUserId(int id) {
-        User user = userRepository.findById(id);
-        return user;
+    public void createOneUser() {
+        User user1 = new User();
+        user1.setName("Ade Wale");
+        user1.setEmail("adewaley@itlize.com");
+        user1.setPassword("MOM");
     }
+
+    @Override
+    public List<User> findByAdmin(String admin) {
+        return userRepository.findByAdmin(admin);
+    }
+
 }

@@ -1,8 +1,6 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Entity.Admin;
 import com.example.demo.Entity.Document;
-import com.example.demo.Service.AdminService;
 import com.example.demo.Service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

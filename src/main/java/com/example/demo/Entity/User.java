@@ -24,9 +24,20 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    public String getAdmin() {
+        return Admin;
+    }
+
+    public void setAdmin(String admin) {
+        this.Admin = admin;
+    }
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "User_id", referencedColumnName = "id")
+    @JoinColumn(name = "project_Id", referencedColumnName = "id")
     private List<Project> projectList = new ArrayList<>();
+
+    @Column(name = "Admin")
+    private String Admin;
 
     @Column(name = "name")
     private String name;
@@ -61,5 +72,45 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Project> getProjectList() {
+        return projectList;
+    }
+
+    public void setProjectList(List<Project> projectList) {
+        this.projectList = projectList;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public Date getTimeOfCreation() {
+        return TimeOfCreation;
+    }
+
+    public void setTimeOfCreation(Date timeOfCreation) {
+        TimeOfCreation = timeOfCreation;
     }
 }

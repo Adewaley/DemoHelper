@@ -28,17 +28,35 @@ public class ProjectProduct {
     @Column(name = "projectId")
     private Long projectId;
 
-//    @Column(name = "productId")
-//    private Long productId;
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    @Column(name = "productId")
+    private Long productId;
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+
 
     @Column(name = "timeAdded")
     private Date timeAdded;
 
-    public Long getId() {
+    public Long getProjectProductId() {
         return projectProductId;
     }
 
-    public void setId(Long id) {
+    public void setProjectProductId(Long id) {
         this.projectProductId = id;
     }
 
