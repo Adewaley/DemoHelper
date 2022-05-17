@@ -25,19 +25,19 @@ public class User {
     private Long id;
 
     public String getAdmin() {
-        return Admin;
+        return admin;
     }
 
     public void setAdmin(String admin) {
-        this.Admin = admin;
+        this.admin = admin;
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "UserProject_Id", referencedColumnName = "id")
     private List<Project> projectList = new ArrayList<>();
 
-    @Column(name = "Admin")
-    private String Admin;
+    @Column(name = "admin")
+    private String admin;
 
     @Column(name = "name")
     private String name;

@@ -29,7 +29,7 @@ public class Product {
     private List<ProjectProduct> projectProductList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "Document_Id", referencedColumnName = "productId")
+    @JoinColumn(name = "documentId", referencedColumnName = "productId")
     private List<Document> documentList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

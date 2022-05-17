@@ -4,5 +4,5 @@ import com.example.demo.Entity.SalesRepresentative;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SalesRepresentativeRepository extends JpaRepository<SalesRepresentative, Integer> {
-    public SalesRepresentative findBySalesRepresentativeId(int salesRepresentativeId);
+    //public SalesRepresentative findBySalesRepresentativeId(int salesRepresentativeId);
 }
