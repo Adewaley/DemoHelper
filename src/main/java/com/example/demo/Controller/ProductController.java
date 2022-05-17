@@ -28,7 +28,7 @@ public class ProductController {
 
     @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
     @ResponseBody
-    public Product getProductDetails(@PathVariable int productId) {
+    public Product getProductDetails(@PathVariable Long productId) {
         Product productResponse = productService.findByProductId(productId);
 
         return productResponse;

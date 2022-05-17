@@ -9,5 +9,6 @@ public interface ProductService {
 
     public Product saveProduct(Product product);
 
-    public Product findByProductId(int id);
+    public Product findByProductId(Long id);
+    public Product findByProjectId(Long id);
 }
