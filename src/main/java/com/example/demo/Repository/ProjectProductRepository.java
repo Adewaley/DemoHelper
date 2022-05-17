@@ -11,7 +11,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-public interface ProjectProductRepository extends JpaRepository<ProjectProduct, Long> {
-    List<ProjectProduct> findByProjectId(Long projectId);
-    List<ProjectProduct> findByProductId(Long ProductId);
+@Repository
+public interface ProjectProductRepository extends JpaRepository<ProjectProduct, Integer> {
+    List<ProjectProduct> findByProjectId(Integer projectId);
+    List<ProjectProduct> findByProductId(Integer ProductId);
 }

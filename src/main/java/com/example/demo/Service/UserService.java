@@ -16,5 +16,7 @@ public interface UserService {
 
     public void createOneUser();
 
+    public void delete(int id, String password);
+
     public List<User> findByAdmin(String admin);
 }
