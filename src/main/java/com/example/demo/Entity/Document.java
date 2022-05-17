@@ -8,12 +8,13 @@ public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "documentId")
     private int documentId;
 
+    @Column(name = "url")
     private String url;
 
     public Document() {
-
     }
 
     public int getDocumentId() {
