@@ -16,6 +16,7 @@ target/
 ### IntelliJ IDEA ###
 .idea
 demo.iml
+.idea/workspace.xml
 *.iws
 *.iml
 *.ipr
