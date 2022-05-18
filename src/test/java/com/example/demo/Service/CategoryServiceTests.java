@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+@SpringBootTest
 public class CategoryServiceTests {
 
     @Autowired
-    private CategoryService categoryService;
+    CategoryService categoryService;
 
     private List<Category> categoryList;
 
