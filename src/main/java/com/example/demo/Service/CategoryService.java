@@ -13,6 +13,4 @@ public interface CategoryService {
 
     Category save(Category category);
 
-    interface ProjectProductService {
-    }
 }

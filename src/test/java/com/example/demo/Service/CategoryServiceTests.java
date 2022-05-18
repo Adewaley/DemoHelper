@@ -4,9 +4,11 @@ import com.example.demo.Entity.Category;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class CategoryServiceTests {
 
@@ -26,6 +28,7 @@ public class CategoryServiceTests {
 
     @Test
     public void saveTest() {
+        System.out.println("category list: " + categoryList.toString());
         categoryService.save(categoryList.get(0));
         categoryService.save(categoryList.get(1));
     }

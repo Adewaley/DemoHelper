@@ -21,20 +21,21 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long projectId;
+    @Column(name = "projectId", nullable = false)
+    private Integer projectId;
 
-    @Column(name = "User")
-    private Long UserId;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ProjectProduct_Id", referencedColumnName = "projectId")
+    private List<ProjectProduct> projectProductList = new ArrayList<>();
 
     @Column(name = "time_created")
     private Date timeCreated;
 
-    public Long getProjectId() {
+    public Integer getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(Long projectId) {
+    public void setProjectId(Integer projectId) {
         this.projectId = projectId;
     }
 
@@ -57,11 +58,11 @@ public class Project {
     @Column(name = "time_Updated")
     private Date timeUpdated;
 
-    public Long getId() {
+    public Integer getId() {
         return projectId;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.projectId = id;
     }
 }
