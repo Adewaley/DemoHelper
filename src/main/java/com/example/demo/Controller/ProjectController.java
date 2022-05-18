@@ -1,9 +1,8 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.Project;
-import com.example.demo.Entity.User;
+
 import com.example.demo.Service.ProjectService;
-import com.example.demo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,15 +12,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/ProjectController")
 public class ProjectController {
-    @Autowired
+    //@Autowired
     private ProjectService projectService;
 
-    @GetMapping
+    @GetMapping("/allProject")
     public List<Project> getAllProjects() {
         return projectService.findAllProject();
     }
 
-    @PostMapping
+    @PostMapping("/ProjectController")
     public Project create(@RequestParam("time_created") Date dateCreated) {
         Project project = new Project();
         project.setTimeCreated(dateCreated);
@@ -46,7 +45,7 @@ public class ProjectController {
         projectService.createOneProject();
     }
 
-    @PostMapping("/project/one")
+    @PostMapping
     public void deleteProject(@RequestParam("id") Integer id) {
         projectService.deleteProject(id);
     }

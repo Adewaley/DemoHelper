@@ -1,6 +1,7 @@
 package com.example.demo.Service.ServiceImpl;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +31,17 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User saveUser(User user) {
-        user = userRepository.save(user);
-        return user;
+    public boolean saveUser(User user) {
+
+        //User user = new User();
+        try{
+            userRepository.save(user);
+        }catch(Exception e){
+            System.out.println("" + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Transactional
@@ -41,6 +50,8 @@ public class UserServiceImpl implements UserService{
         user1.setName("Ade Wale");
         user1.setEmail("adewaley@itlize.com");
         user1.setPassword("MOM");
+        user1.setTimeOfCreation(new Timestamp(System.currentTimeMillis()));
+        user1.setLastLogin(new Timestamp(System.currentTimeMillis()));
         userRepository.save(user1);
     }
 

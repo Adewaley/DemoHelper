@@ -11,18 +11,18 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/UserController")
+@RequestMapping(value = "/users")
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
+    @GetMapping("/users/all")
     public List<User> getAllUsers() {
         return userService.findAllUser();
     }
 
-    @PostMapping("/users")
-    public User create(@RequestParam("name") String name,
+    @PostMapping("/users/create")
+    public boolean create(@RequestParam("name") String name,
                        @RequestParam("email") String email,
                        @RequestParam("password") String password,
                        @RequestParam("admin") String admin) {
@@ -31,16 +31,16 @@ public class UserController {
         user.setEmail(email);
         user.setPassword(password);
         user.setAdmin(admin);
-        return userService.saveUser(user);
+        return true;
     }
 
-    @GetMapping("/users/")
+    @GetMapping("/users/id")
     public User findById(@RequestParam("id") Integer id) {
         return userService.findOneUserById(id);
     }
 
-    @PutMapping("/users/")
-    public User updateUser(@RequestParam("id") Integer id,
+    @PutMapping("/users/upd")
+    public boolean updateUser(@RequestParam("id") Integer id,
                            @RequestParam("name") String name,
                            @RequestParam("email") String email,
                            @RequestParam("password") String password) {

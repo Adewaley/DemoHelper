@@ -14,14 +14,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     public String getAdmin() {
@@ -49,10 +50,10 @@ public class User {
     private String password;
 
     @Column(name = "lastlogin")
-    private Date lastLogin;
+    private Timestamp lastLogin;
 
     @Column(name = "creationtime")
-    private Date TimeOfCreation;
+    private Timestamp TimeOfCreation;
 
     public User(){
     }
@@ -98,19 +99,19 @@ public class User {
         this.password = password;
     }
 
-    public Date getLastLogin() {
+    public Timestamp getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(Date lastLogin) {
+    public void setLastLogin(Timestamp lastLogin) {
         this.lastLogin = lastLogin;
     }
 
-    public Date getTimeOfCreation() {
+    public Timestamp getTimeOfCreation() {
         return TimeOfCreation;
     }
 
-    public void setTimeOfCreation(Date timeOfCreation) {
+    public void setTimeOfCreation(Timestamp timeOfCreation) {
         TimeOfCreation = timeOfCreation;
     }
 }

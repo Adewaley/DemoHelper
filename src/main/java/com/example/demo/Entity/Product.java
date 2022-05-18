@@ -20,8 +20,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "productId", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "productId")
     private Long productId;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

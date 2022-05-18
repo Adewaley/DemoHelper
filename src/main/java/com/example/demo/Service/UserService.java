@@ -4,6 +4,7 @@ import com.example.demo.Entity.Category;
 import com.example.demo.Entity.User;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface UserService {
 
     User findOneUserById(Integer id);
 
-    User saveUser(User category);
+    boolean saveUser(User category);
 
     public void createOneUser();
 
