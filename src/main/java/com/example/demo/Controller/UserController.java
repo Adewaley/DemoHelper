@@ -1,10 +1,14 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.Project;
+import com.example.demo.Entity.Role;
 import com.example.demo.Entity.User;
+import com.example.demo.Service.ServiceImpl.UserServiceImpl;
 import com.example.demo.Service.UserService;
 
+import com.example.demo.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -13,8 +17,14 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
+
+    //@Autowired
+    //private AuthenticationManager myauthenticaitonManager;
     @Autowired
-    private UserService userService;
+    private UserService userService; // new userService()
+
+    @Autowired
+    private JwtUtil jwtTokenUtil;
 
     @GetMapping("/users/all")
     public List<User> getAllUsers() {
@@ -30,7 +40,7 @@ public class UserController {
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
-        user.setAdmin(admin);
+        user.setRole(Role.ADMIN);
         return true;
     }
 

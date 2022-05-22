@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.Entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,9 +68,10 @@ public class UserServiceImpl implements UserService{
         }
     }
 
+
     @Override
-    public List<User> findByAdmin(String admin) {
-        return userRepository.findByAdmin(admin);
+    public List<User> findByRole(Role role) {
+        return userRepository.findByRole(role);
     }
 
 }
