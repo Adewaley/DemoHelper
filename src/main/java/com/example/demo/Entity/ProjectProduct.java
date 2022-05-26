@@ -1,62 +1,55 @@
 package com.example.demo.Entity;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
+import com.example.demo.Repository.ProjectProductRepository;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class ProjectProduct {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "projectProductid", nullable = false)
-    private Long projectProductId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "project_productid")
+    private Integer projectProductId;
 
-    @Column(name = "projectId")
-    private Long projectId;
+    //
+    @ManyToOne(targetEntity = Project.class, cascade = CascadeType.DETACH)
+    @JoinColumn (name="project_Id", nullable=false)
+    private Project project;
 
-    public Long getProjectId() {
-        return projectId;
+    @ManyToOne(targetEntity = Product.class, cascade = CascadeType.DETACH)
+    @JoinColumn (name="product_Id", nullable=false)
+    private Product product;
+
+    public Project getProject() {
+        return this.project;
     }
 
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
-    @Column(name = "productId")
-    private Long productId;
-
-    public Long getProductId() {
-        return productId;
+    public Product getProduct() {
+        return this.product;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-
-
-    @Column(name = "timeAdded")
+    @Column(name = "time_Added")
     private Date timeAdded;
 
-    public Long getProjectProductId() {
+    public Integer getProjectProductId() {
         return projectProductId;
     }
 
-    public void setProjectProductId(Long id) {
+    public void setProjectProductId(Integer id) {
         this.projectProductId = id;
     }
 

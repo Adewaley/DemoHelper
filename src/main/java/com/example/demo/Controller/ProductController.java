@@ -32,7 +32,7 @@ public class ProductController {
         return productService.findByProductId(id);
     }
 
-    @PostMapping
+    @PostMapping("/saveAProduct")
     public Product createProduct(@RequestParam("description") String description,
                        @RequestParam("type") String type,
                        @RequestParam("detail") String detail,

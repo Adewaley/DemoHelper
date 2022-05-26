@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-
+@Service("projectServiceImpl")
 public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
@@ -22,7 +22,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project findOneProjectById(Integer id) {
-        return (Project) projectRepository.findByProjectId(id);
+        return  projectRepository.findById(id).orElse(null);
     }
 
     @Override

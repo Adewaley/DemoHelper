@@ -16,16 +16,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-@Entity
+@Entity(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "productId")
-    private Long productId;
+    private Integer productId;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "ProjectProduct_id", referencedColumnName = "productId")
+    @OneToMany (targetEntity = ProjectProduct.class,mappedBy="product", cascade={CascadeType.ALL})
+    //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProjectProduct> projectProductList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -41,6 +44,14 @@ public class Product {
 
     @Column(name = "description")
     private String description;
+
+    public List<ProjectProduct> getProjectProductList() {
+        return projectProductList;
+    }
+
+    public void setProjectProductList(List<ProjectProduct> projectProductList) {
+        this.projectProductList = projectProductList;
+    }
 
     @Column(name =" type")
     private String type;
@@ -65,13 +76,13 @@ public class Product {
 
     public Product(){
     }
-    public Product(Long id){this.productId = id;}
+    public Product(Integer id){this.productId = id;}
 
-    public Long getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 

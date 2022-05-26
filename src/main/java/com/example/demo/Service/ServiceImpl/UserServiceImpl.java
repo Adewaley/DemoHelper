@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.example.demo.Entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Entity.User;
@@ -21,9 +22,17 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public List<User> findAllUser() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByName(username).orElse(null);
     }
 
     @Override
@@ -31,18 +40,24 @@ public class UserServiceImpl implements UserService{
         return userRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public boolean saveUser(User user) {
+//    @Override
+//    public boolean saveUser(User user) {
+//
+//        //User user = new User();
+//        try{
+//            userRepository.save(user);
+//        }catch(Exception e){
+//            System.out.println("" + e.getMessage());
+//            e.printStackTrace();
+//            return false;
+//        }
+//        return true;
+//    }
 
-        //User user = new User();
-        try{
-            userRepository.save(user);
-        }catch(Exception e){
-            System.out.println("" + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+    @Override
+    public User saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 
     @Transactional

@@ -16,17 +16,29 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-@Entity
+@Entity(name = "project")
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "projectId", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "projectId")
     private Integer projectId;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "ProjectProduct_Id", referencedColumnName = "projectId")
+
+    @OneToMany(targetEntity = ProjectProduct.class, mappedBy = "project", cascade = {CascadeType.ALL})
+    //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProjectProduct> projectProductList = new ArrayList<>();
+
+    public List<ProjectProduct> getProjectProductList() {
+        return projectProductList;
+    }
+
+    public void setProjectProductList(List<ProjectProduct> projectProductList) {
+        this.projectProductList = projectProductList;
+    }
 
     @Column(name = "time_created")
     private Date timeCreated;
@@ -58,11 +70,4 @@ public class Project {
     @Column(name = "time_Updated")
     private Date timeUpdated;
 
-    public Integer getId() {
-        return projectId;
-    }
-
-    public void setId(Integer id) {
-        this.projectId = id;
-    }
 }

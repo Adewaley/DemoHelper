@@ -34,7 +34,7 @@ public class User {
         this.role = role;
     }
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false,length = 256)
     private String name;
 
     @Column(name = "email")
@@ -62,7 +62,7 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {

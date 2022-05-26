@@ -5,6 +5,7 @@ import com.example.demo.filters.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,68 +26,76 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-        @Autowired
-        MyUserDetailService myUserDetailService;
-        @Autowired
-        private JwtRequestFilter jwtRequestFilter;
+    @Autowired
+    MyUserDetailService myUserDetailService;
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
 
-        @Autowired
-        private PasswordEncoder passwordEncoder;
-
-
-//	@Override
-//	@Bean
-//	public AuthenticationManager authenticationManagerBean() throws Exception {
-//		return super.authenticationManagerBean();
-//	}
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
 
-
-        //@Autowired
-        @Override
-        //Authentication
-        public void configure(AuthenticationManagerBuilder auth) throws Exception {
-            // Configure database-based user password query.
-            // Password uses BCryptEncoder (combined with random salt and encryption algorithm) that comes with security.
-            //Override the UserdatailsService class
-            auth.userDetailsService(myUserDetailService)
-                    //Override the default password verification class
-                    .passwordEncoder(passwordEncoder);
-        }
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
 
-        @Override
-        protected void configure(HttpSecurity httpSecurity) throws Exception {
+    @Bean
+    public PasswordEncoder passwordEncoder (){
+        return new BCryptPasswordEncoder();
+    }
 
 
-            httpSecurity.csrf().disable()
-                    //Cross-origin-resource-sharing
-                    .cors().and()
-                    .authorizeRequests()
-                    .antMatchers("/user/authenticate").permitAll()
-                    .antMatchers("/user/createUser").permitAll()
-                    .antMatchers("/users/admin/**").hasRole("ADMIN")
-                    .anyRequest().fullyAuthenticated();// others need to be accessed after authentication
+    @Autowired
+    //@Override
+    //Authentication
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // Configure database-based user password query.
+        // Password uses BCryptEncoder (combined with random salt and encryption algorithm) that comes with security.
+        //Override the UserDetailService class
+        auth.userDetailsService(myUserDetailService)
+                //Override the default password verification class
+                .passwordEncoder(passwordEncoder());
+    }
 
 
-            httpSecurity
-                    .exceptionHandling().and()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-            httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
-        }
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
 
 
-        @Bean
-        public WebMvcConfigurer corsConfigure() {
-            return new WebMvcConfigurer() {
-                @Override
-                public void addCorsMappings(CorsRegistry registry) {
+        httpSecurity.csrf().disable()
+                //Cross-origin-resource-sharing
+                .cors().and()
+                .authorizeRequests()
+                .antMatchers("/users/authenticate").permitAll()
+                .antMatchers("/users/createUser").permitAll()
+                .antMatchers("/users/login").permitAll()
+                .antMatchers("/users/welcome").permitAll()
+                .antMatchers("/users/admin").hasRole("ADMIN")
+                .anyRequest().fullyAuthenticated();// others need to be accessed after authentication
 
-                    registry.addMapping("/**").allowedOrigins("*").allowedMethods("*");
-                }
-            };
-        }
+
+        httpSecurity
+                .exceptionHandling().and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
+    }
+
+
+    @Bean
+    public WebMvcConfigurer corsConfigure() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+
+                registry.addMapping("/**").allowedOrigins("*").allowedMethods("*");
+            }
+        };
+    }
+
 
 }

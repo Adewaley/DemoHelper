@@ -37,18 +37,7 @@ public class MySqlConnectionTestApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//		String sql = "INSERT INTO users (fullname, email, password, adminV, creationtime, lastlogin) VALUES (?, ?, ?, ?, ?, ?)";
-//
-//		int result = jdbcTemplate.update(sql, "wale", "wale@gmail.com", "Panda1",  );
-////		if(result > 0){
-////			System.out.println("A new row has been inserted");
-////		}
 
-	}
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
 	}
 
 }

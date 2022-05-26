@@ -1,6 +1,8 @@
 package com.example.demo.Service;
 
 import com.example.demo.Entity.Category;
+import com.example.demo.Entity.Product;
+import com.example.demo.Entity.Project;
 import com.example.demo.Entity.ProjectProduct;
 import com.example.demo.Repository.ProjectProductRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,7 +14,9 @@ import java.util.List;
 public interface ProjectProductService{
     List<ProjectProduct> findAll();
 
-    ProjectProduct findOneProjectProductByProductId(Integer id);
+    List<ProjectProduct> findOneProjectProductByProductId(Product product);
 
-    ProjectProduct saveProjectProduct(ProjectProduct projectProduct);
+    ProjectProduct saveProjectProduct(ProjectProduct projectProduct, Product product, Project project);
+
+    ProjectProduct findById(Integer Id);
 }

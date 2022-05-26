@@ -12,9 +12,11 @@ import java.util.List;
 public interface UserService {
     List<User> findAllUser();
 
+    User findByUsername(String username);
+
     User findOneUserById(Integer id);
 
-    boolean saveUser(User category);
+    User saveUser(User category);
 
     public void createOneUser();
 

@@ -12,23 +12,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 //@RunWith(SpringRunner.class)
-//@SpringBootTest
+@SpringBootTest
 public class UserServiceTest {
     @Autowired
     private UserService userService ;
 
     private User user;
 
-//    @BeforeEach
-//    public void setup() {
-//        User user1 = new User();
-//        user1.setName("userTestName");
-//        user1.setEmail("userTestEmail");
-//        user1.setPassword("userTestPassword");
-//
-//        user = userService.saveUser(user1);
+    @BeforeEach
+    public void setup() {
+        User user1 = new User();
+        user1.setName("userTestName");
+        user1.setEmail("userTestEmail");
+        user1.setPassword("userTestPassword");
+
+        user = userService.saveUser(user1);
 //        System.out.println("User: " + user);
-//    }
+    }
 
     @Test
     public void saveTest() {
@@ -38,8 +38,8 @@ public class UserServiceTest {
         user2.setPassword("userTestPassword");
         user2.setEmail("userTestEmail");
 
-        boolean savedUser = userService.saveUser(user2);
-        Assertions.assertTrue(savedUser);
+        User savedUser = userService.saveUser(user2);
+        //Assertions.assertTrue(savedUser);
     }
 
     @Test

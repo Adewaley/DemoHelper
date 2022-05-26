@@ -19,15 +19,13 @@ public class MyUserDetailService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
-
-
     /*** During login verification, obtain all the user's authority information
      * through username* And return UserDetails to spring's global cache SecurityContextHolder
      * for use by the authorizer*/
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByName(username).orElse(null);
+        User user = userRepository.findByName(username).orElseThrow(()-> new UsernameNotFoundException(username));//.orElse(null);
         if(user == null){
             throw new UsernameNotFoundException(username);
         }
