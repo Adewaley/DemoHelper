@@ -73,6 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users/createUser").permitAll()
                 .antMatchers("/users/login").permitAll()
                 .antMatchers("/users/welcome").permitAll()
+                //.antMatchers("/users/all").permitAll()
                 .antMatchers("/users/admin").hasRole("ADMIN")
                 .anyRequest().fullyAuthenticated();// others need to be accessed after authentication
 

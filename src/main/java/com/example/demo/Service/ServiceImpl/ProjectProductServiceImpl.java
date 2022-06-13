@@ -12,6 +12,7 @@ import com.example.demo.Service.ProjectProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service("projectProductServiceImpl")
@@ -49,6 +50,7 @@ public class ProjectProductServiceImpl implements ProjectProductService {
 //        productRepository.findById(product.getProductId());
 
         // save project and product
+        Date currentDate = new Date();
         projectRepository.save(project);
         productRepository.save(product);
 

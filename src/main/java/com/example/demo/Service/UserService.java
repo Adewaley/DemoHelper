@@ -20,7 +20,7 @@ public interface UserService {
 
     public void createOneUser();
 
-    public void delete(int id, String password);
+    public boolean delete(int id, String password);
 
     public List<User> findByRole(Role role);
 }

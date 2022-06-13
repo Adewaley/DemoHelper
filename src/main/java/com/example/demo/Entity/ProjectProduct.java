@@ -8,16 +8,17 @@ import java.util.List;
 import javax.persistence.Entity;
 
 import com.example.demo.Repository.ProjectProductRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class ProjectProduct {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "project_productid")
     private Integer projectProductId;
 
-    //
+    @JsonIgnore
     @ManyToOne(targetEntity = Project.class, cascade = CascadeType.DETACH)
     @JoinColumn (name="project_Id", nullable=false)
     private Project project;

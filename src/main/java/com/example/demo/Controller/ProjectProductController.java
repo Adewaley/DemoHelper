@@ -7,6 +7,7 @@ import com.example.demo.Entity.ProjectProduct;
 import com.example.demo.Service.CategoryService;
 import com.example.demo.Service.ProductService;
 import com.example.demo.Service.ProjectProductService;
+import com.example.demo.Service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,10 +22,15 @@ public class ProjectProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private ProjectService projectService;
+
     @GetMapping("/allProjectProduct")
     public List<ProjectProduct> getAllProjectProduct() {
         return projectProductService.findAll();
     }
+
+
 
     @GetMapping("/getProjectProduct")
     public List<ProjectProduct> getProjectProductById(@RequestParam("id") Integer id) {
@@ -38,14 +44,20 @@ public class ProjectProductController {
     @PostMapping("/createProjectProduct")
     public ProjectProduct createProjectProduct( /**@RequestParam("time") Date time_added**/) {
         Date time_added = new Date();
-        Project test = new Project();
-        Product testp = new Product();
+        Project project = new Project();
+        Product product = new Product();
+
+        productService.saveProduct(product);
+        projectService.saveProject(project);
+
         if (time_added != null) {
             ProjectProduct projProd = new ProjectProduct();
             projProd.setTimeAdded(time_added);
-            return projectProductService.saveProjectProduct(projProd, testp, test);
+            return projectProductService.saveProjectProduct(projProd, product, project);
         } else {
             return null;
         }
     }
+
+
 }

@@ -23,6 +23,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController// @CONTROLLER + @response body
+@CrossOrigin(origins="http://localhost:4200")
 @RequestMapping(value = "/users")
 public class UserController {
 
@@ -37,12 +38,12 @@ public class UserController {
     @Autowired
     private MyUserDetailService userDetailService;
 
-    @GetMapping("/users/all")
+    @GetMapping("/all")
     public List<User> getAllUsers() {
         return userService.findAllUser();
     }
 
-    @PostMapping("/users/create")
+    @PostMapping("/create")
     public boolean create(@RequestParam("name") String name,
                        @RequestParam("email") String email,
                        @RequestParam("password") String password,
@@ -74,10 +75,13 @@ public class UserController {
 
     //sign in
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestParam(name="username") String username,
-                                                       @RequestParam(name="password") String password)
-    //@RequestBody User User)
+    public ResponseEntity<?> createAuthenticationToken(@RequestParam (name="username") String username,
+                                                       @RequestParam (name="password") String password)
+                                                        //@RequestBody User User)
             throws Exception {
+
+//        String username = user.getName();
+//        String password = user.getPassword();
 
         try {
             myauthenticaitonManager.authenticate(
@@ -97,32 +101,35 @@ public class UserController {
         return  new ResponseEntity<>(jwt, HttpStatus.OK);
     }
 
+
+
     @PostMapping("/createUser")
     public ResponseEntity<?> register(@RequestBody User user) {
+
+       // add code for conflict if user already exists
         if (userService.findByUsername(user.getName()) != null) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        user.setRole(Role.ADMIN);
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
 
-    @PostMapping
-    public void delete(int id, String password) {
-        userService.delete(id, userService.findOneUserById(id).getPassword());
+//    @PostMapping("/createUser")
+//    public ResponseEntity<?> register(@RequestParam("name") String name,
+//                          @RequestParam("email") String email,
+//                          @RequestParam("password") String password,
+//                          @RequestParam("admin") String admin) {
+//        User user = new User();
+//        user.setName(name);
+//        user.setEmail(email);
+//        user.setPassword(password);
+//        user.setRole(Role.ADMIN);
+//        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
+//    }
+
+    @PostMapping("/deleteUser")
+    public ResponseEntity<?> delete(@RequestParam("password") String password, @RequestParam("id") int id) {
+
+        return new ResponseEntity<>(userService.delete(id, password), HttpStatus.OK);
     }
 
-    @GetMapping("/login") public String login()
-    {
-        return "login.html";
-    }
-
-    @GetMapping("/admin") public String user()
-    {
-        return "Admin.html";
-    }
-
-    @GetMapping("/welcome") public String welcome()
-    {
-        return "welcome.html";
-    }
 }

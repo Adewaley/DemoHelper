@@ -27,7 +27,7 @@ public class Project {
     private Integer projectId;
 
 
-    @OneToMany(targetEntity = ProjectProduct.class, mappedBy = "project", cascade = {CascadeType.ALL})
+    @OneToMany(targetEntity = ProjectProduct.class, mappedBy = "project", cascade = {CascadeType.DETACH})
     //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProjectProduct> projectProductList = new ArrayList<>();

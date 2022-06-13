@@ -72,14 +72,20 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void delete(int id, String password) {
+    public boolean delete(int id, String password) {
         User toBeDeleted = findOneUserById(id);
-        if(toBeDeleted == null) System.out.println("Does not exist");
-        try{
-            userRepository.deleteById(id);
-        }catch (Exception e){
-            System.out.println("" + e.getMessage());
-            e.printStackTrace();
+        if(toBeDeleted == null) {
+            System.out.println("Does not exist");
+            return false;
+        }
+        else{
+            try{
+                userRepository.deleteById(id);
+            }catch (Exception e){
+                System.out.println("" + e.getMessage());
+                e.printStackTrace();
+            }
+            return true;
         }
     }
 

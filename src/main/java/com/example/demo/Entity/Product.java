@@ -26,7 +26,7 @@ public class Product {
     @Column(name = "productId")
     private Integer productId;
 
-    @OneToMany (targetEntity = ProjectProduct.class,mappedBy="product", cascade={CascadeType.ALL})
+    @OneToMany (targetEntity = ProjectProduct.class,mappedBy="product", cascade={CascadeType.DETACH})
     //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProjectProduct> projectProductList = new ArrayList<>();
